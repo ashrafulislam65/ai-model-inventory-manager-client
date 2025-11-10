@@ -26,7 +26,12 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">AIM Manager</a>
+                    <button className="relative overflow-hidden px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105">
+                        <span className="absolute inset-0 rounded-full bg-linear-to-r from-purple-500 to-blue-500 blur-xl opacity-60"></span>
+                        <span className="relative flex items-center gap-2">
+                           AIM Manager
+                        </span>
+                    </button>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
