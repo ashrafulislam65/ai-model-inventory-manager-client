@@ -1,8 +1,25 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui" {
+   themes: light --default, dark --prefersdark;
+}
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
   --color-primary: blue;
   --color-secondary: teal;
+}
+html[data-theme='dark'] {
+  background: radial-gradient(circle at 30% 20%, #22114c 0%, #0b0f29 60%, #050611 100%);
+  color-scheme: dark;
+}
+
+html[data-theme='light'] {
+  background: #ffffff;
+  color-scheme: light;
+}
+
+/* Smooth Theme Transition */
+html {
+  transition: background 0.6s ease, color 0.6s ease;
 }
