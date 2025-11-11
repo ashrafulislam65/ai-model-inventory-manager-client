@@ -9,6 +9,7 @@ import ErrorPage from './Pages/ErrorPage';
 import AllModels from './Pages/AllModels';
 import AddModel from './Pages/AddModel';
 import AuthProvider from './context/AuthProvider';
+import Register from './components/Register/Register';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       },
       {path: "models",
         Component:AllModels,
+      },
+      {
+        path:"register",
+        Component:Register,
       }
     ]
   },
