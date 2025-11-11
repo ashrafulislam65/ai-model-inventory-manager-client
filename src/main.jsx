@@ -10,6 +10,8 @@ import AllModels from './Pages/AllModels';
 import AddModel from './Pages/AddModel';
 import AuthProvider from './context/AuthProvider';
 import Register from './components/Register/Register';
+import MyModels from './components/MyModels/MyModels';
+import MyModelPurchase from './components/My Model Purchase/MyModelPurchase';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       {
         path:"register",
         Component:Register,
+      },
+      {
+        path:"myModels",
+        element:<MyModels></MyModels>,
+      },
+      {
+        path:"myModelPurchase",
+        element:<MyModelPurchase></MyModelPurchase>,
       }
     ]
   },

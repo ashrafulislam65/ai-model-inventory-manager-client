@@ -4,16 +4,16 @@ import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
-    const { user,signOutUser } = use(AuthContext);
-    
+    const { user, signOutUser } = use(AuthContext);
+
     const handleSignOut = () => {
         signOutUser()
-        .then(() => {
-            alert('Sign out successful');
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(() => {
+                alert('Sign out successful');
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
 
     }
@@ -22,7 +22,14 @@ const Navbar = () => {
         <li><NavLink to='/add-model'>Add Model</NavLink></li>
         <li><NavLink to='/models'>View Models</NavLink></li>
         <li><NavLink to='/register'>Register</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to='/myModels'>My Models</NavLink></li>
+                <li><NavLink to='/myModelPurchase'>My Model Purchase</NavLink></li>
 
+
+            </>
+        }
 
     </>
     return (
