@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
+    const { user,signOutUser } = use(AuthContext);
+    
+    const handleSignOut = () => {
+        signOutUser()
+        .then(() => {
+            alert('Sign out successful');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+
+    }
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/add-model'>Add Model</NavLink></li>
@@ -30,7 +44,7 @@ const Navbar = () => {
                     <button className="relative overflow-hidden px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105">
                         <span className="absolute inset-0 rounded-full bg-linear-to-r from-purple-500 to-blue-500 blur-xl opacity-60"></span>
                         <span className="relative flex items-center gap-2">
-                           AIM Manager
+                            AIM Manager
                         </span>
                     </button>
                 </div>
@@ -64,12 +78,21 @@ const Navbar = () => {
                             <ThemeToggle></ThemeToggle>
                         </ul>
                     </div>
-                    <button className="relative overflow-hidden px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105">
-                        <span className="absolute inset-0 rounded-full bg-linear-to-r from-purple-500 to-blue-500 blur-xl opacity-60"></span>
-                        <span className="relative flex items-center gap-2">
-                            Get Started
-                        </span>
-                    </button>
+                    {
+                        user ?
+                            <button onClick={handleSignOut} className="relative overflow-hidden px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105">
+                                <span className="absolute inset-0 rounded-full bg-linear-to-r from-purple-500 to-blue-500 blur-xl opacity-60"></span>
+                                <span className="relative flex items-center gap-2">
+                                    Sign Out
+                                </span>
+                            </button> :
+                            <button className="relative overflow-hidden px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105">
+                                <span className="absolute inset-0 rounded-full bg-linear-to-r from-purple-500 to-blue-500 blur-xl opacity-60"></span>
+                                <span className="relative flex items-center gap-2">
+                                    Sign In
+                                </span>
+                            </button>
+                    }
 
 
                 </div>
