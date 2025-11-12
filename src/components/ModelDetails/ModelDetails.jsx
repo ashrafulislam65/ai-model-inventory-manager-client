@@ -1,14 +1,25 @@
 
-import { use, useRef } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const ModelDetails = () => {
     const model = useLoaderData();
-    const purchaseModalRef = useRef(null);
-    const {user} = use(AuthContext)
-    const { _id:modelId,name, framework, useCase, dataset, description, image, purchased,createdBy } = model;
+    const { _id: modelId, name, framework, useCase, dataset, description, image, purchased, createdBy } = model;
     console.log(model);
+    const [purchasedData, setPurchasedData] = useState([]);
+     const [purchaseCount, setPurchaseCount] = useState(purchased || 0);
+    const purchaseModalRef = useRef(null);
+    const { user } = use(AuthContext)
+    useEffect(() => {
+        fetch(`http://localhost:3000/models/purchased/${modelId}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log('purchased of the model', data);
+                setPurchasedData(data);
+            })
+    }, [modelId]);
     const handlePurchaseModalOpen = () => {
         purchaseModalRef.current.showModal();
 
@@ -21,27 +32,56 @@ const ModelDetails = () => {
         const createdBy = e.target.createdBy.value;
         const purchasedBy = e.target.purchasedBy.value;
         const image = e.target.image.value;
-        console.log( modelId,name, framework, useCase, createdBy, purchasedBy, image );
-        const newPurchase ={
-            modelId:modelId,
-            modelName:name,
-            framework:framework,
-            useCase:useCase,
-            createdBy:createdBy,
-            purchasedBy:purchasedBy,
-            image:image
+        console.log(modelId, name, framework, useCase, createdBy, purchasedBy, image);
+        const newPurchase = {
+            modelId: modelId,
+            modelName: name,
+            framework: framework,
+            useCase: useCase,
+            createdBy: createdBy,
+            purchasedBy: purchasedBy,
+            buyer_image: user?.photoURL,
+            image: image
         }
-        fetch('http://localhost:3000/purchased',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
+        fetch('http://localhost:3000/purchased', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body:JSON.stringify(newPurchase)
+            body: JSON.stringify(newPurchase)
         })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log('after purchased',data);
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    purchaseModalRef.current.close();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your have purchased Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    newPurchase._id = data.insertedId;
+                    setPurchasedData([...purchasedData, newPurchase]);
+
+                    // PATCH to increment purchase count
+                    fetch(`http://localhost:3000/models/purchase/${modelId}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                    })
+                        .then((res) => res.json())
+                        .then((result) => {
+                            if (result.success) {
+                                setPurchaseCount((prev) => prev + 1);
+                                
+                            }
+                        })
+                        .catch((err) =>
+                            console.error("Error updating purchase count:", err)
+                        );
+                }
+            })
+
     };
     return (
         <>
@@ -87,7 +127,7 @@ const ModelDetails = () => {
                             </p>
 
                             <p className="text-sm text-gray-400">
-                                <span className="font-semibold text-purple-300">{purchased}</span>{" "}
+                                <span className="font-semibold text-purple-300">{purchaseCount}</span>{" "}
                                 times purchased
                             </p>
 
@@ -135,6 +175,7 @@ const ModelDetails = () => {
                             method="dialog"
                             className="space-y-4"
                             onSubmit={handlePurchaseSubmit}
+
                         >
                             {/* Name */}
                             <div>
@@ -148,7 +189,7 @@ const ModelDetails = () => {
                                     readOnly
                                     placeholder="Enter model name"
                                     className="input input-bordered w-full bg-base-100/50 focus:outline-none focus:border-primary transition-all"
-                                    
+
                                 />
                             </div>
 
@@ -164,7 +205,7 @@ const ModelDetails = () => {
                                     readOnly
                                     placeholder="Enter framework name"
                                     className="input input-bordered w-full bg-base-100/50 focus:outline-none focus:border-primary transition-all"
-                                    
+
                                 />
                             </div>
 
@@ -180,7 +221,7 @@ const ModelDetails = () => {
                                     readOnly
                                     placeholder="Describe the use case"
                                     className="input input-bordered w-full bg-base-100/50 focus:outline-none focus:border-primary transition-all"
-                                    
+
                                 />
                             </div>
 
@@ -206,7 +247,7 @@ const ModelDetails = () => {
                                 <input
                                     type="email"
                                     name="purchasedBy"
-                                    defaultValue={user.email}
+                                    defaultValue={user?.email}
                                     readOnly
                                     className="input input-bordered w-full bg-base-100/50 focus:outline-none focus:border-primary transition-all"
                                     required
@@ -239,14 +280,73 @@ const ModelDetails = () => {
                                     </span>
                                 </button>
 
-                                
-                                    <button className="btn btn-outline btn-sm">Close</button>
-                               
+
+
+
                             </div>
                         </form>
+                        <div className='flex justify-end  '>
+                            <button onClick={() => purchaseModalRef.current.close()} className="btn  btn-outline  btn-sm">Close</button>
+                        </div>
                     </div>
                 </dialog>
 
+            </div>
+            <div className='px-20 py-20'>
+                {/* purchased for the models */}
+                <h3 className='text-3xl'>Purchased of the  model: <span>{purchasedData.length}</span></h3>
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>
+                                    SL No.
+                                </th>
+                                <th>Buyer Name</th>
+                                <th>Buyer Email</th>
+                                <th>Purchase</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            {
+                                purchasedData.map((buy, index) => <tr>
+                                    <th> {index + 1}</th>
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle h-12 w-12">
+                                                    <img
+                                                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                                                        alt="Avatar Tailwind CSS Component" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {buy.purchasedBy}
+                                    </td>
+                                    <td>{buy.
+                                        modelName}</td>
+                                    <th>
+                                        <button className="btn btn-ghost btn-xs">details</button>
+                                    </th>
+                                </tr>)
+                            }
+                            {/* row 2 */}
+
+                            {/* row 3 */}
+
+                            {/* row 4 */}
+
+                        </tbody>
+                        {/* foot */}
+
+                    </table>
+                </div>
             </div>
         </>
     );
