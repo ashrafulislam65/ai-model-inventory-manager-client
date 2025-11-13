@@ -15,6 +15,7 @@ import MyModelPurchase from './components/My Model Purchase/MyModelPurchase';
 import ModelDetails from './components/ModelDetails/ModelDetails';
 import UpdateModel from './components/UpdateModel/UpdateModel';
 import LogIn from './components/LogIn/LogIn';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,9 @@ const router = createBrowserRouter([
       },
       {
         path: "add-model",
-        Component:AddModel,
+        element:<PrivateRoute>
+          <AddModel></AddModel>
+        </PrivateRoute>,
       },
       {path: "models",
         Component:AllModels,
@@ -42,20 +45,28 @@ const router = createBrowserRouter([
       },
       {
         path:"myModels",
-        element:<MyModels></MyModels>,
+        element:<PrivateRoute>
+          <MyModels></MyModels>
+        </PrivateRoute>,
       },
       {
         path:"myModelPurchase",
-        element:<MyModelPurchase></MyModelPurchase>,
+        element:<PrivateRoute>
+          <MyModelPurchase></MyModelPurchase>
+        </PrivateRoute>,
       },
       {
         path: "modelDetails/:id",
         loader:({params})=>fetch(`http://localhost:3000/models/${params.id}`),
-        Component:ModelDetails,
+        element:<PrivateRoute>
+          <ModelDetails></ModelDetails>
+        </PrivateRoute>,
       },
       {
         path: "update-model/:id",
-        Component:UpdateModel,
+        element:<PrivateRoute>
+          <UpdateModel></UpdateModel>
+        </PrivateRoute>,
       }
       
     ]
