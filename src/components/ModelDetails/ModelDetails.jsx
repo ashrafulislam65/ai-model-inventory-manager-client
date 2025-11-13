@@ -1,6 +1,6 @@
 
 import { use, useEffect, useRef, useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { Navigate, useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 
@@ -9,9 +9,10 @@ const ModelDetails = () => {
     const { _id: modelId, name, framework, useCase, dataset, description, image, purchased, createdBy } = model;
     console.log(model);
     const [purchasedData, setPurchasedData] = useState([]);
-     const [purchaseCount, setPurchaseCount] = useState(purchased || 0);
+    const [purchaseCount, setPurchaseCount] = useState(purchased || 0);
     const purchaseModalRef = useRef(null);
     const { user } = use(AuthContext)
+    const navigate = useNavigate();
     useEffect(() => {
         fetch(`http://localhost:3000/models/purchased/${modelId}`)
             .then(res => res.json())
@@ -73,7 +74,7 @@ const ModelDetails = () => {
                         .then((result) => {
                             if (result.success) {
                                 setPurchaseCount((prev) => prev + 1);
-                                
+
                             }
                         })
                         .catch((err) =>
@@ -81,7 +82,35 @@ const ModelDetails = () => {
                         );
                 }
             })
+        // Handle Delete (only creator)
 
+    };
+    const handleDelete = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Once deleted, you cannot recover this model!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#9333ea",
+            cancelButtonColor: "#1e293b",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/models/${modelId}`, {
+                    method: "DELETE",
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            Swal.fire("Deleted!", "Your model has been deleted.", "success");
+                            navigate("/models"); // Redirect after deletion
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error deleting model:", error);
+                    });
+            }
+        });
     };
     return (
         <>
@@ -153,6 +182,25 @@ const ModelDetails = () => {
                                         Purchase Model
                                     </span>
                                 </button>
+                                {/* Edit/Delete (if creator) */}
+                                {user?.email === createdBy && (
+                                    <>
+                                        <button
+                                            onClick={() => Navigate(`/edit-model/${modelId}`)}
+                                            className="btn btn-warning btn-sm text-white"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={()=> handleDelete()
+                                                
+                                            }
+                                            className="btn btn-error btn-sm text-white"
+                                        >
+                                            Delete
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
