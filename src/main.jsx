@@ -16,6 +16,7 @@ import ModelDetails from './components/ModelDetails/ModelDetails';
 import UpdateModel from './components/UpdateModel/UpdateModel';
 import LogIn from './components/LogIn/LogIn';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Loader from './components/Loader';
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
       {
         path: "modelDetails/:id",
         loader:({params})=>fetch(`https://ai-inventory-model-manager-server.vercel.app/models/${params.id}`),
+        hydrateFallbackElement:<Loader></Loader>,
         element:<PrivateRoute>
           <ModelDetails></ModelDetails>
         </PrivateRoute>,
