@@ -13,6 +13,7 @@ import Register from './components/Register/Register';
 import MyModels from './components/MyModels/MyModels';
 import MyModelPurchase from './components/My Model Purchase/MyModelPurchase';
 import ModelDetails from './components/ModelDetails/ModelDetails';
+import UpdateModel from './components/UpdateModel/UpdateModel';
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,12 @@ const router = createBrowserRouter([
         path: "modelDetails/:id",
         loader:({params})=>fetch(`http://localhost:3000/models/${params.id}`),
         Component:ModelDetails,
+      },
+      {
+        path: "update-model/:id",
+        Component:UpdateModel,
       }
+      
     ]
   },
   {

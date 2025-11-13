@@ -186,7 +186,7 @@ const ModelDetails = () => {
                                 {user?.email === createdBy && (
                                     <>
                                         <button
-                                            onClick={() => Navigate(`/edit-model/${modelId}`)}
+                                            onClick={() => navigate(`/update-model/${modelId}`)}
                                             className="btn btn-warning btn-sm text-white"
                                         >
                                             Edit
