@@ -14,6 +14,7 @@ import MyModels from './components/MyModels/MyModels';
 import MyModelPurchase from './components/My Model Purchase/MyModelPurchase';
 import ModelDetails from './components/ModelDetails/ModelDetails';
 import UpdateModel from './components/UpdateModel/UpdateModel';
+import LogIn from './components/LogIn/LogIn';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path:"register",
         Component:Register,
+      },
+      {
+        path:"login",
+        Component:LogIn,
       },
       {
         path:"myModels",
