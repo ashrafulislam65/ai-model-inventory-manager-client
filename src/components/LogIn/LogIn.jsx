@@ -29,7 +29,7 @@ const LogIn = () => {
             await signInUser(formData.email, formData.password);
             navigate('/');
         } catch (error) {
-            console.error("Login error:", error);
+            
             setError(error.message || 'Failed to sign in. Please check your credentials.');
         } finally {
             setLoading(false);
@@ -42,11 +42,11 @@ const LogIn = () => {
 
         signInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                console.log(result);
                 navigate('/');
             })
             .catch(error => {
-                console.log(error);
+                
                 setError(error.message);
             })
             .finally(() => {

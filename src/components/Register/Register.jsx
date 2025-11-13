@@ -100,7 +100,7 @@ const Register = () => {
             };
 
             // Save user to your database
-            const response = await fetch('http://localhost:3000/users', {
+            const response = await fetch('https://ai-inventory-model-manager-server.vercel.app/users', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -116,7 +116,7 @@ const Register = () => {
             navigate('/');
 
         } catch (error) {
-            console.error("Registration error:", error);
+            
             let errorMessage = 'Failed to create account. Please try again.';
 
             // Firebase specific error messages
@@ -141,7 +141,7 @@ const Register = () => {
 
         signInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                
                 const newUser = {
                     name: result.user.displayName,
                     email: result.user.email,
@@ -151,7 +151,7 @@ const Register = () => {
                 }
 
                 // Create user in the database
-                return fetch('http://localhost:3000/users', {
+                return fetch('https://ai-inventory-model-manager-server.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -165,7 +165,7 @@ const Register = () => {
                 navigate('/');
             })
             .catch(error => {
-                console.log(error);
+                
                 showErrorToast(error.message);
             })
             .finally(() => {

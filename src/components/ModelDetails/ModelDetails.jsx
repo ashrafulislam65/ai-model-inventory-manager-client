@@ -7,17 +7,17 @@ import Swal from 'sweetalert2';
 const ModelDetails = () => {
     const model = useLoaderData();
     const { _id: modelId, name, framework, useCase, dataset, description, image, purchased, createdBy } = model;
-    console.log(model);
+    
     const [purchasedData, setPurchasedData] = useState([]);
     const [purchaseCount, setPurchaseCount] = useState(purchased || 0);
     const purchaseModalRef = useRef(null);
     const { user } = use(AuthContext)
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://localhost:3000/models/purchased/${modelId}`)
+        fetch(`https://ai-inventory-model-manager-server.vercel.app/models/purchased/${modelId}`)
             .then(res => res.json())
             .then(data => {
-                console.log('purchased of the model', data);
+                
                 setPurchasedData(data);
             })
     }, [modelId]);
@@ -33,7 +33,7 @@ const ModelDetails = () => {
         const createdBy = e.target.createdBy.value;
         const purchasedBy = e.target.purchasedBy.value;
         const image = e.target.image.value;
-        console.log(modelId, name, framework, useCase, createdBy, purchasedBy, image);
+        
         const newPurchase = {
             modelId: modelId,
             modelName: name,
@@ -44,7 +44,7 @@ const ModelDetails = () => {
             buyer_image: user?.photoURL,
             image: image
         }
-        fetch('http://localhost:3000/purchased', {
+        fetch('https://ai-inventory-model-manager-server.vercel.app/purchased', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ const ModelDetails = () => {
                     setPurchasedData([...purchasedData, newPurchase]);
 
                     // PATCH to increment purchase count
-                    fetch(`http://localhost:3000/models/purchase/${modelId}`, {
+                    fetch(`https://ai-inventory-model-manager-server.vercel.app/models/purchase/${modelId}`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
                     })
@@ -96,7 +96,7 @@ const ModelDetails = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/models/${modelId}`, {
+                fetch(`https://ai-inventory-model-manager-server.vercel.app/models/${modelId}`, {
                     method: "DELETE",
                 })
                     .then(res => res.json())

@@ -25,7 +25,7 @@ const Navbar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/add-model'>Add Model</NavLink></li>
         <li><NavLink to='/models'>All Models</NavLink></li>
-        <li><NavLink to='/register'>Register</NavLink></li>
+        
        
     </>;
     return (

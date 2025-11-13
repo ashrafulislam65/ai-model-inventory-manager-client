@@ -17,7 +17,7 @@ const MyModels = () => {
                     return;
                 }
 
-                const response = await fetch(`http://localhost:3000/my-models?creatorEmail=${user.email}`);
+                const response = await fetch(`https://ai-inventory-model-manager-server.vercel.app/my-models?creatorEmail=${user.email}`);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch models');

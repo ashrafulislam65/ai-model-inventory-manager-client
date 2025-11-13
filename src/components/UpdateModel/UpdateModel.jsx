@@ -21,7 +21,7 @@ const UpdateModel = () => {
     useEffect(() => {
         const fetchModel = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/models/${id}`);
+                const res = await fetch(`https://ai-inventory-model-manager-server.vercel.app/models/${id}`);
                 const data = await res.json();
 
                 if (data._id) {
@@ -66,7 +66,7 @@ const UpdateModel = () => {
         }
 
         try {
-            const res = await fetch(`http://localhost:3000/update-model/${id}`, {
+            const res = await fetch(`https://ai-inventory-model-manager-server.vercel.app/update-model/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'

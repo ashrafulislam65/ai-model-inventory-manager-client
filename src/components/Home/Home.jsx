@@ -15,7 +15,7 @@ import GetStarted from '../GetStarted/GetStarted';
 
 
 const Home = () => {
-    const featuredModelsPromise = fetch("http://localhost:3000/featured-models")
+    const featuredModelsPromise = fetch("https://ai-inventory-model-manager-server.vercel.app/featured-models")
         .then(res => res.json())
 
     return (

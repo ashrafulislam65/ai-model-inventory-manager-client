@@ -3,7 +3,7 @@ import Model from '../Model/Model';
 
 const FeaturedModels = ({ featuredModelsPromise }) => {
     const models = use(featuredModelsPromise);
-    console.log(models);
+    
     return (
         <div className=' md:15 py-20 lg:px-20'>
             <h2 className='text-center text-5xl pb-20 font-bold'>Featured Models</h2>

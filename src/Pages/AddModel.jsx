@@ -30,7 +30,7 @@ const AddModel = () => {
         };
 
         // POST request to backend
-        fetch("http://localhost:3000/add-model", {
+        fetch("https://ai-inventory-model-manager-server.vercel.app/add-model", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

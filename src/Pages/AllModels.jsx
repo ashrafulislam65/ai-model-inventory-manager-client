@@ -14,7 +14,7 @@ const AllModels = () => {
         const fetchModels = async () => {
             try {
                 setLoading(true);
-                const response = await fetch("http://localhost:3000/models");
+                const response = await fetch("https://ai-inventory-model-manager-server.vercel.app/models");
                 const data = await response.json();
 
                 setModels(data);
@@ -47,7 +47,7 @@ const AllModels = () => {
                 params.append('framework', selectedFramework);
             }
 
-            const url = `http://localhost:3000/models/combined?${params.toString()}`;
+            const url = `https://ai-inventory-model-manager-server.vercel.app/models/combined?${params.toString()}`;
             const response = await fetch(url);
             const data = await response.json();
 
