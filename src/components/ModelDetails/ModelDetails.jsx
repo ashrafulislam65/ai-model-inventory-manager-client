@@ -312,7 +312,7 @@ const ModelDetails = () => {
                         <tbody>
                             {/* row 1 */}
                             {
-                                purchasedData.map((buy, index) => <tr>
+                                purchasedData.map((buy, index) => <tr key={buy._id}>
                                     <th> {index + 1}</th>
                                     <td>
                                         <div className="flex items-center gap-3">
