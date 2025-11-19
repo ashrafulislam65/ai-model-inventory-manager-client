@@ -205,6 +205,80 @@ npm run dev
 
 ---
 
+---
+# 🚀 How to Run This Project on Your Local Machine
+## 🚀 How to Run This Project Locally
+
+This project has two parts:
+- **Client (React)**
+- **Server (Express + MongoDB)**
+
+Below is the step-by-step setup guide for both.
+
+---
+
+## 🖥️ 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/ai-model-inventory-client.git
+git clone https://github.com/your-username/ai-model-inventory-server.git
+
+Replace your-username with your GitHub username.
+---
+
+## 📦 2. Client Setup (React App)
+cd ai-model-inventory-client
+npm install
+npm run dev
+After starting, Vite will usually run on:
+http://localhost:5173/
+
+---
+
+---
+
+## 🛠️ 3. Server Setup (Express + MongoDB)
+cd ../ai-model-inventory-server
+npm install
+
+---
+---
+## 🔐 Create .env File
+Inside the project root, create a .env file and add:
+PORT=5000
+MONGO_URI=your_mongo_db_connection_string
+
+---
+## ▶️ Start the Server
+npm start
+By default, the server will run at:
+http://localhost:5000/
+
+---
+🌐 4. Connect Client With Server
+
+Inside the client project, create/update your .env file:
+
+VITE_API_URL=http://localhost:5000
+
+🔍 If everything is set correctly:
+
+Client runs at: http://localhost:5173/
+
+Server runs at: http://localhost:5000/
+
+MongoDB: Connected
+
+All Auth + CRUD features work ✔
+
+🎉 You have successfully set up the project locally!
+
+---
+
+If you want, I can **merge this guide into your full README** or **format it in a cleaner style** 
+
+
+
 # 🌟 AI Model Inventory Manager
 
 **Assignment Category:** B12-A10_category-0014
