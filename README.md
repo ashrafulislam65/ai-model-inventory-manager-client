@@ -453,27 +453,3 @@ npm run dev
 
 ---
 
-## 💡 Tips
-
-* Always hide secrets using `.env`.
-* Use **React Toastify** or **DaisyUI Toasts** for notifications.
-* Test routes and persistence carefully.
-* Keep UI clean, minimal, and modern.
-
----
-
-**📚 Developed for Educational Purposes — Built with ❤️ using React, Express, MongoDB & Firebase.**
-
-
----
-
-## 💡 Tips
-
-* Always hide secrets using `.env`.
-* Use **React Toastify** or **DaisyUI Toasts** for notifications.
-* Test routes and persistence carefully.
-* Keep UI clean, minimal, and modern.
-
----
-
-**📚 Developed for Educational Purposes — Built with ❤️ using React, Express, MongoDB & Firebase.**
