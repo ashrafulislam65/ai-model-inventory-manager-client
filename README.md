@@ -4,17 +4,11 @@
   <img src="https://i.ibb.co.com/rKnK7pVS/Ai10.png" width="80%" alt="Home Page Screenshot" />
 </p>
 
-<p align="center">
-  <img src="https://your-image-link-2.com" width="80%" alt="All Models Page Screenshot" />
-</p>
 
-<p align="center">
-  <img src="https://your-image-link-3.com" width="80%" alt="Model Details Page Screenshot" />
-</p>
 
 # 🌟 AI Model Inventory Manager
 
-**Assignment Category:** B12-A10_category-0014
+
 **Project Type:** Full Stack Web Application
 **Tech Stack:** React | Tailwind CSS | DaisyUI | Express.js | MongoDB | Firebase
 
