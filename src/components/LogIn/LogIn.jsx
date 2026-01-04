@@ -108,7 +108,7 @@ const LogIn = () => {
 
                             <button
                                 type="submit"
-                                className="btn btn-primary w-full mt-4"
+                                className="btn btn-neutral w-full mt-4"
                                 disabled={loading}
                             >
                                 {loading ? (
