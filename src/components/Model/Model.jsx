@@ -5,7 +5,7 @@ const Model = ({ model }) => {
     const { _id,name, framework, image, description } = model;
     return (
         <div className=''>
-            <div className="card bg-base-200/40 backdrop-blur-md border border-white/10 shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-300 rounded-xl overflow-hidden">
+            <div className="card h-[400px] bg-base-200/40 backdrop-blur-md border border-white/10 shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-300 rounded-xl overflow-hidden">
 
 
                 <figure className="w-full aspect-4/3 overflow-hidden">
