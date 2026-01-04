@@ -20,7 +20,7 @@ const Home = () => {
 
     return (
         <div className=''>
-            <div className='lg:px-20  lg:my-30   '>
+            <div className='lg:px-20    '>
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
@@ -35,9 +35,9 @@ const Home = () => {
                     modules={[Autoplay, Pagination, Navigation]}
                     className="mySwiper "
                 >
-                    <SwiperSlide><img src='https://i.ibb.co.com/tPkBms9r/Chat-GPT-Image-Nov-13-2025-04-57-32-PM.png' alt="" /></SwiperSlide>
-                    <SwiperSlide><img src="https://i.ibb.co.com/NdbTbfX3/Chat-GPT-Image-Nov-13-2025-05-08-02-PM.png" alt="" /></SwiperSlide>
-                    <SwiperSlide><img src="https://i.ibb.co.com/NdbTbfX3/Chat-GPT-Image-Nov-13-2025-05-08-02-PM.png" alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='h-[500px] w-full' src='https://i.ibb.co.com/tPkBms9r/Chat-GPT-Image-Nov-13-2025-04-57-32-PM.png' alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='h-[500px] w-full' src="https://i.ibb.co.com/NdbTbfX3/Chat-GPT-Image-Nov-13-2025-05-08-02-PM.png" alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='h-[500px] w-full' src="https://i.ibb.co.com/NdbTbfX3/Chat-GPT-Image-Nov-13-2025-05-08-02-PM.png" alt="" /></SwiperSlide>
 
                 </Swiper>
             </div>
