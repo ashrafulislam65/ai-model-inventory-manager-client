@@ -12,6 +12,8 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import AboutAiModel from '../AboutAiModel/AboutAiModel';
 import GetStarted from '../GetStarted/GetStarted';
 import TargetUsers from '../TargetUsers';
+import CTASection from '../CTASection';
+import BenefitsSection from '../BenifitsSection';
 
 
 
@@ -48,6 +50,8 @@ const Home = () => {
             </Suspense>
             <AboutAiModel></AboutAiModel>
             <TargetUsers></TargetUsers>
+            <BenefitsSection></BenefitsSection>
+            <CTASection></CTASection>
             <GetStarted></GetStarted>
             
         </div>

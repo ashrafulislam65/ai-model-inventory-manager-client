@@ -12,7 +12,7 @@ const ThemeToggle = () => {
     return (
         <div>
             <button
-                className="btn btn-primary"
+                className="btn btn-neutral"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >
                 {theme === "light" ? "🌙 Dark Mode" : "☀ Light Mode"}
