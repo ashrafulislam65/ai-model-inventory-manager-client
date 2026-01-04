@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import AboutAiModel from '../AboutAiModel/AboutAiModel';
 import GetStarted from '../GetStarted/GetStarted';
+import TargetUsers from '../TargetUsers';
 
 
 
@@ -46,7 +47,9 @@ const Home = () => {
 
             </Suspense>
             <AboutAiModel></AboutAiModel>
+            <TargetUsers></TargetUsers>
             <GetStarted></GetStarted>
+            
         </div>
     );
 };
